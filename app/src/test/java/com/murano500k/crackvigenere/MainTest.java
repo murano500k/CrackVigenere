@@ -10,13 +10,7 @@ import java.util.Random;
 
 import static com.murano500k.crackvigenere.DeVigenere.MAX_KEY_LENGTH;
 import static com.murano500k.crackvigenere.DeVigenere.alphabet;
-import static org.junit.Assert.assertTrue;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class MainTest {
     private static final String ENCRYPTED = "testencrypted.txt";
     private static final String INPUT_FILE0 = "testinput0.txt";
@@ -24,7 +18,7 @@ public class MainTest {
     private static final String INPUT_FILE2 = "testinput2.txt";
     private static final String INPUT_FILE3 = "testinput3.txt";
     private static final String TEST_KEY = "testpassword";
-    private static final int TEST_ITERATIONS = 10;
+    private static final int TEST_ITERATIONS = 100;
 
     @Test
     public void testEncrypt()throws Exception{
@@ -64,7 +58,7 @@ public class MainTest {
             if(keyLength<3) keyLength=3;
             String key = getRandomKey(keyLength);
             DeVigenere v = new DeVigenere(key);
-            if(iterate(i,input,v)>0){
+            if(iterate(input,v)>0){
                 if(minSuccessfullLength>i){
                     minSuccessfullLength=i;
                     System.out.println("\nkey = "+key+"\nCurrent min successfull length = "+minSuccessfullLength);
@@ -75,7 +69,6 @@ public class MainTest {
         }
 
         System.out.println("###########\n\n\nMin successfull length: "+minSuccessfullLength);
-        assertTrue(minSuccessfullLength>0);
     }
 
     @Test
@@ -95,7 +88,7 @@ public class MainTest {
             String input = inputUntrimmed.substring(0,i);
             String key = getRandomKey(MAX_KEY_LENGTH);
             DeVigenere v = new DeVigenere(key);
-            if(iterate(i,input,v)>0){
+            if(iterate(input,v)>0){
                 if(minSuccessfullLength>i){
                     minSuccessfullLength=i;
                     System.out.println("key = "+key+"\nCurrent min successfull length = "+minSuccessfullLength);
@@ -106,16 +99,14 @@ public class MainTest {
         }
 
         System.out.println("###########\n\n\nMin successfull length: "+minSuccessfullLength);
-        assertTrue(minSuccessfullLength>0);
     }
 
 
-
-    public static int iterate(int i,String input, DeVigenere v){
+    public static int iterate(String input, DeVigenere v){
         String C = v.encrypt(input);
         Result result = v.crack(C);
         if(result.text.contentEquals(input) && result.key.contains(v.key)) {
-            return i;
+            return input.length();
         }
         else return -1;
     }
@@ -155,12 +146,12 @@ public class MainTest {
     }
 
     public static String getRandomKey(int length) {
-        String base = "abcdefghijklmnopqrstuvwxyz";
+
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < length; i++) {
-            int number = random.nextInt(base.length());
-            sb.append(base.charAt(number));
+            int number = random.nextInt(alphabet.length());
+            sb.append(alphabet.charAt(number));
         }
         return sb.toString();
     }

@@ -72,7 +72,7 @@ public class DeVigenere {
                 bestPwdLen=pwlen;
             }
         }
-        return new Result(best, String.valueOf(resolveKey(input, best,bestPwdLen))/**/);
+        return new Result(best, String.valueOf(resolveKey(input, best,bestPwdLen)));
     }
 
     private static String resolveKey(String enc, String input, int bestPwdLen) {
