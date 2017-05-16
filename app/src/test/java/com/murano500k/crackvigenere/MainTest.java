@@ -24,7 +24,7 @@ public class MainTest {
     private static final String INPUT_FILE2 = "testinput2.txt";
     private static final String INPUT_FILE3 = "testinput3.txt";
     private static final String TEST_KEY = "testpassword";
-    private static final int TEST_ITERATIONS = 10;
+    private static final int TEST_ITERATIONS = 100;
 
     @Test
     public void testEncrypt()throws Exception{
