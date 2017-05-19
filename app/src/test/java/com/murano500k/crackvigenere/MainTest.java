@@ -18,23 +18,30 @@ public class MainTest {
     private static final String INPUT_FILE2 = "testinput2.txt";
     private static final String INPUT_FILE3 = "testinput3.txt";
     private static final String TEST_KEY = "testpassword";
-    private static final int TEST_ITERATIONS = 100;
+    private static final int TEST_ITERATIONS = 10;
 
     @Test
     public void testEncrypt()throws Exception{
+
+        System.out.println("\n\n###################");
+        System.out.println("test encrypt input");
         DeVigenere vigenere =new DeVigenere(TEST_KEY);
         String input=getInput(-1);
-        System.out.println("input:\n"+input);
-        System.out.println("###################\n");
-        System.out.println("key="+vigenere.key);
-        System.out.println("encrypted:\n"+vigenere.encrypt(input));
+        System.out.println("input: "+input);
+        System.out.println("output: ");
+        System.out.println("key = "+vigenere.key);
+        System.out.println("encrypted: "+vigenere.encrypt(input));
     }
 
     @Test
     public void testCrack()throws Exception{
+
+        System.out.println("\n\n###################");
+        System.out.println("test crack encrypted text");
         String input = Main.readFile(ENCRYPTED);
+
         Result result =DeVigenere.devignere(input,12,'a','z');
-        System.out.println("\tResult:\n\tkey:\n"+result.key+"\n\ttext:\n"+result.text);
+        System.out.println("Result:\n\tkey: "+result.key+"\n\ttext: "+result.text);
         Assert.assertTrue(TEST_KEY.contains(result.key));
     }
 
@@ -42,6 +49,11 @@ public class MainTest {
     //Find minimum length of input text encrypted with 2-12 char key
     //  which can be successfully decrypted
     public void testMinInputLengthRandomKeySize() throws Exception {
+
+        System.out.println("\n\n###################");
+        System.out.println("test shortest successfully cracked text");
+        System.out.println("key length - random string 2 - 12 chars length");
+        System.out.println("best result of 100 successful iterations will be shown");
         String inputUntrimmed;
         try {
             inputUntrimmed = cleanInput(getInput(-1));
@@ -61,20 +73,25 @@ public class MainTest {
             if(iterate(input,v)>0){
                 if(minSuccessfullLength>i){
                     minSuccessfullLength=i;
-                    System.out.println("\nkey = "+key+"\nCurrent min successfull length = "+minSuccessfullLength);
+                    System.out.println("key = "+key+"\nCurrent min successfull length = "+minSuccessfullLength);
                 }
                 i=MAX_KEY_LENGTH;
                 successCount++;
             }
         }
 
-        System.out.println("###########\n\n\nMin successfull length: "+minSuccessfullLength);
+        System.out.println("Result\nRandom key size, shortest decrypted text length: "+minSuccessfullLength);
     }
 
     @Test
     //Find minimum length of input text encrypted with 12 char key
     //  which can be successfully decrypted
     public void testMinInputLengthMaxKeySize() throws Exception {
+
+        System.out.println("\n\n###################");
+        System.out.println("test shortest successfully cracked text");
+        System.out.println("key length - random string 12 chars length");
+        System.out.println("best result of 100 successful iterations will be shown");
         String inputUntrimmed;
         try {
             inputUntrimmed = cleanInput(getInput(-1));
@@ -91,14 +108,14 @@ public class MainTest {
             if(iterate(input,v)>0){
                 if(minSuccessfullLength>i){
                     minSuccessfullLength=i;
-                    System.out.println("key = "+key+"\nCurrent min successfull length = "+minSuccessfullLength);
+
                 }
                 i=MAX_KEY_LENGTH;
                 successCount++;
             }
         }
 
-        System.out.println("###########\n\n\nMin successfull length: "+minSuccessfullLength);
+        System.out.println("Result\nMax key size, shortest decrypted text length: "+minSuccessfullLength);
     }
 
 
