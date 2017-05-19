@@ -15,3 +15,10 @@ cd CrackVigenere
 <br/>
 Gradle build command will also run tests. Results will be stored at:<br/>
 ./app/build/test-results/testDebugUnitTest/TEST-com.murano500k.crackvigenere.MainTest.xml
+<br/>
+<br/>
+<br/>
+app/src/main/java/com/murano500k/crackvigenere/DeVigenere.java - Decrypting logic<br/>
+app/src/main/java/com/murano500k/crackvigenere/Main.java - Application Main class<br/>
+app/src/test/java/com/murano500k/crackvigenere/MainTest.java - Tests<br/>
+
