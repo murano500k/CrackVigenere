@@ -8,6 +8,9 @@ cd CrackVigenere
 ./gradlew build
 <br/>
 ./gradlew run  -PappArgs="['PATH_TO_ENCRYPTED_TEXT_FILE']"
+<br/><br/>Example:<br/>
+./gradlew run  -PappArgs="['/home/artem/projects/CrackVigenere/app/testencrypted.txt']"
+<br/>
 <br/>
 <br/>
 Gradle build command will also run tests. Results will be stored at:<br/>
